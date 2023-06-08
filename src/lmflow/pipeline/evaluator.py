@@ -59,7 +59,7 @@ class Evaluator(BasePipeline):
         else:
             deepspeed.init_distributed()
 
-        self.config = AutoConfig.from_pretrained(model_args.model_name_or_path)
+        self.config = AutoConfig.from_pretrained(model_args.model_name_or_path, trust_remote_code=True)
         try: 
             self.model_hidden_size = self.config.hidden_size
         except:
