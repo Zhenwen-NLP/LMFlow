@@ -198,6 +198,7 @@ class HFDecoderModel(DecoderModel, Tunable):
                     revision=model_args.model_revision,
                     use_auth_token=True if model_args.use_auth_token else None,
                     torch_dtype=torch_dtype,
+                    trust_remote_code = True,
                 )
             else:
                 model = AutoModelForCausalLM.from_config(config)
@@ -241,7 +242,8 @@ class HFDecoderModel(DecoderModel, Tunable):
                         offload_folder="offload",
                         offload_state_dict=True,
                         torch_dtype=torch_dtype,
-                        load_in_8bit = model_args.use_int8
+                        load_in_8bit = model_args.use_int8,
+                        trust_remote_code = True,
                     )
                 if peft_model_id is not None:
                     self.backend_model = PeftModel.from_pretrained(
