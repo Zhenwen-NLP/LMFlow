@@ -117,6 +117,7 @@ class HFDecoderModel(DecoderModel, Tunable):
             "use_fast": model_args.use_fast_tokenizer,
             "revision": model_args.model_revision,
             "use_auth_token": True if model_args.use_auth_token else None,
+            "trust_remote_code": True,
         }
         if model_args.tokenizer_name:
             tokenizer = AutoTokenizer.from_pretrained(model_args.tokenizer_name, **tokenizer_kwargs)
